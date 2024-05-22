@@ -1,0 +1,1828 @@
+{
+	"info": {
+		"_postman_id": "19bc0cd0-30d2-485a-b2d9-56e4aef83015",
+		"name": "Customer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33398086"
+	},
+	"item": [
+		{
+			"name": "Customer Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.globals.set(\"tokenValue\", response['access_token']);\r",
+							"\r",
+							"pm.execution.setNextRequest(\"Inspector Devices\")"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "salman",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "rishad",
+							"type": "text"
+						},
+						{
+							"key": "sub_domain",
+							"value": "customer",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/auth/login",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dashboard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/dashboard/view",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"dashboard",
+						"view"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Translations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/languages/keys",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"languages",
+						"keys"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inspector Devices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"const device = response.items[0];\r",
+							"\r",
+							"pm.globals.set(\"deviceKey\", device.device_key);\r",
+							"pm.globals.set(\"customer_id\", device.customer_id);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-devices",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-devices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Verification Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.globals.set(\"verificationToken\", response.token);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-devices/verification-token?device_key={{deviceKey}}",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-devices",
+						"verification-token"
+					],
+					"query": [
+						{
+							"key": "device_key",
+							"value": "{{deviceKey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify device",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.globals.set(\"deviceId\", response.device_id);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "verification-token",
+						"value": "{{verificationToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"customer_id\": \"{{customer_id}}\",\r\n  \"device_key\": \"{{deviceKey}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/verify",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inspector Device Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.globals.set(\"deviceToken\", response.token);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"device_id\": \"{{deviceId}}\",\r\n  \"customer_id\": \"{{customer_id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/login",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inspector Device Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('validate response', () =>{\r",
+							"    pm.expect(response).to.have.property(\"is_active\");\r",
+							"} )\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/status",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activate License",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('validate response', () =>{\r",
+							"    pm.expect(response).to.have.property(\"license_status\");\r",
+							"    pm.expect(response.license_status).to.be.eql(\"license_activated\")\r",
+							"} )\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/activate-license",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"activate-license"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deactivate License",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('validate response', () =>{\r",
+							"    pm.expect(response).to.have.property(\"license_status\");\r",
+							"    pm.expect(response.license_status).to.be.eql(\"license_deactivated\")\r",
+							"} )\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/deactivate-license",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"deactivate-license"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Activate License Again",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('validate response', () =>{\r",
+							"    pm.expect(response).to.have.property(\"license_status\");\r",
+							"    pm.expect(response.license_status).to.be.eql(\"license_activated\")\r",
+							"} )\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/activate-license",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"activate-license"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Language",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('validate response', () =>{\r",
+							"    pm.expect(response[0]).to.have.property(\"label\");\r",
+							"} )\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/languages",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"languages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Language Translation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/language-translations?language_code=en",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"language-translations"
+					],
+					"query": [
+						{
+							"key": "language_code",
+							"value": "en"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Plexor Devices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Avaiable Device Check', () =>{\r",
+							"    pm.expect(response[0]).to.have.property(\"name\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/plexor-devices",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"plexor-devices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Digital Manometer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Avaiable Device Check', () =>{\r",
+							"    pm.expect(response[0]).to.have.property(\"serial_number\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/digital-manometers",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"digital-manometers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inspection Points",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Avaiable Inspection Point Check', () =>{\r",
+							"    pm.expect(response[0]).to.have.property(\"measure_point\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/inspection-points",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"inspection-points"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inspection Procedure",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Validate Response', () =>{\r",
+							"    pm.expect(response[0]).to.have.property(\"name\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/inspection-procedures",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"inspection-procedures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Station Information",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Verify Response', () =>{\r",
+							"    pm.expect(response[0]).to.have.property(\"identification_code\");\r",
+							"})\r",
+							"\r",
+							"pm.execution.setNextRequest('Inspection Device Settings')\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/station-information",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"station-information"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inspection Result",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"// pm.test('Verify Response', () =>{\r",
+							"//     pm.expect(response[0]).to.have.property(\"identification_code\");\r",
+							"// })\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"status\": \"string\",\r\n    \"prs_id\": \"string\",\r\n    \"prs_name\": \"string\",\r\n    \"prs_identification\": \"string\",\r\n    \"prs_code\": \"string\",\r\n    \"gcl_id\": \"string\",\r\n    \"gas_control_line_name\": \"string\",\r\n    \"gcl_identification\": \"string\",\r\n    \"gcl_code\": \"string\",\r\n    \"inspection_procedure_id\": \"string\",\r\n    \"inspection_procedure_name\": \"string\",\r\n    \"inspection_procedure_version\": \"string\",\r\n    \"measurement_equipment\": {\r\n      \"id_dm1\": {\r\n        \"type\": \"string\",\r\n        \"serial_number\": \"string\"\r\n      },\r\n      \"id_dm2\": {\r\n        \"type\": \"string\",\r\n        \"serial_number\": \"string\"\r\n      },\r\n      \"bt_address\": \"string\"\r\n    },\r\n    \"start_date\": \"2024-05-16\",\r\n    \"start_time\": \"05:36:05.801Z\",\r\n    \"end_time\": \"05:36:05.801Z\",\r\n    \"time_zone\": \"string\",\r\n    \"dst\": \"string\",\r\n    \"results\": [\r\n      {\r\n        \"script_command_id\": \"string\",\r\n        \"object_id\": \"string\",\r\n        \"object_name\": \"string\",\r\n        \"measure_point_id\": \"string\",\r\n        \"measure_point\": \"string\",\r\n        \"time\": \"05:36:05.801Z\",\r\n        \"measure_value\": {\r\n          \"value\": 0,\r\n          \"uom\": \"string\"\r\n        },\r\n        \"text\": \"string\",\r\n        \"lists\": [\r\n          [\r\n            \"string\"\r\n          ]\r\n        ],\r\n        \"fpr_data\": {\r\n          \"interval\": 0,\r\n          \"count_total\": 0,\r\n          \"start_at\": \"2024-05-16T05:36:05.801Z\",\r\n          \"end_at\": \"2024-05-16T05:36:05.801Z\",\r\n          \"uom\": \"string\",\r\n          \"data\": [\r\n            {\r\n              \"value\": 0,\r\n              \"time\": \"05:36:05.801Z\",\r\n              \"extra_data\": \"string\"\r\n            }\r\n          ],\r\n          \"extra_data\": [\r\n            {\r\n              \"value\": 0,\r\n              \"time\": \"05:36:05.801Z\",\r\n              \"extra_data\": \"string\"\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    ]\r\n  }\r\n]\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/inspection-results",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"inspection-results"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inspection Device Settings",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Verify Response', () =>{\r",
+							"    pm.expect(response).to.have.property(\"name\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/settings",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Units",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const response = pm.response.json();\r",
+							"\r",
+							"pm.test('Verify Response', () =>{\r",
+							"    pm.expect(response).to.have.property(\"unit_low_pressure\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/units",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"units"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Units Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const apiResponse = pm.response.json();\r",
+							"\r",
+							"pm.test('Verify Response', () =>{\r",
+							"    pm.expect(apiResponse.response).to.have.property(\"unit_low_pressure\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspector-device/units/test",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspector-device",
+						"units",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gas Stations",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const apiResponse = pm.response.json();\r",
+							"\r",
+							"// pm.test('Verify Response', () =>{\r",
+							"//     pm.expect(apiResponse.response).to.have.property(\"unit_low_pressure\");\r",
+							"// })\r",
+							"\r",
+							"pm.globals.set(\"prsID\", apiResponse.items[0].id);\r",
+							"pm.globals.set(\"gclID\", apiResponse.items[0].gas_control_lines[0].id);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/gas-stations",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"gas-stations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inspection Results",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"const apiResponse = pm.response.json();\r",
+							"\r",
+							"// pm.test('Verify Response', () =>{\r",
+							"//     pm.expect(apiResponse.response).to.have.property(\"unit_low_pressure\");\r",
+							"// })\r",
+							"\r",
+							"// pm.globals.set(\"todaysDate\", apiResponse.items[0].id);\r",
+							"// pm.globals.set(\"gclID\", apiResponse.items[0].gas_control_lines[0].id);\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');\r",
+							"\r",
+							"pm.globals.set('currentdate', moment().format((\"YYYY-MM-DD\")));\r",
+							"pm.globals.set('currenttime', moment().format((\"HH:MM:SS\")));\r",
+							"\r",
+							"// Get the current date and time\r",
+							"var currentDate = new Date();\r",
+							"\r",
+							"// Subtract 2 hours from the current date and time\r",
+							"currentDate.setHours(currentDate.getHours() - 2);\r",
+							"\r",
+							"// Format the date as HH:MM:SS\r",
+							"var hours = currentDate.getHours().toString().padStart(2, '0');\r",
+							"var minutes = currentDate.getMinutes().toString().padStart(2, '0');\r",
+							"var seconds = currentDate.getSeconds().toString().padStart(2, '0');\r",
+							"var formattedTime = `${hours}:${minutes}:${seconds}`;\r",
+							"\r",
+							"// Set the formatted time as a global variable in Postman\r",
+							"pm.globals.set(\"timeMinusTwoHours\", formattedTime);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{tokenValue}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{deviceToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"prs_id\": \"{{prsID}}\",\r\n  \"gcl_id\": \"{{gclID}}\",\r\n  \"start_date\": \"{{currentdate}}\",\r\n  \"start_time\": \"{{timeMinusTwoHours}}\",\r\n  \"end_time\": \"{{currenttime}}\",\r\n  \"time_zone\": \"GMT+06:00\",\r\n  \"tag\": \"SAL123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customerBaseUrl}}/api/v1/inspection-results/payload?store_result=yes",
+					"host": [
+						"{{customerBaseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"inspection-results",
+						"payload"
+					],
+					"query": [
+						{
+							"key": "store_result",
+							"value": "yes"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "customerBaseUrl",
+			"value": "http://20.52.5.183:5000\n",
+			"type": "string"
+		},
+		{
+			"value": "",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
